@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,12 +34,12 @@ namespace IndependentMetals.Actions
             driver.FindElement(By.CssSelector(PageObject.SecondaryAccept)).Click();
             System.Threading.Thread.Sleep(1000);
         }
-        public async Task DropDownPicker()
+        public async Task DropDownPicker(string type)
         {
             driver.FindElement(By.CssSelector(PageObject.TypeContainer)).Click();
             var typeContainer = driver.FindElement(By.XPath(PageObject.PressedContainer));
             typeContainer.Click();
-            typeContainer.SendKeys(Parameters.type);
+            typeContainer.SendKeys(type);
             typeContainer.SendKeys(Keys.ArrowDown);
             typeContainer.SendKeys(Keys.Enter);
             //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -71,31 +72,22 @@ namespace IndependentMetals.Actions
         public async Task ResultGenerator()
         {
             await Task.Delay(3000);
-            var selector = $"div#w1";
-            Console.WriteLine(selector);
             for (int i = 2; i <= 4; i++)
             {
-                await Task.Delay(3000); 
+                await Task.Delay(3000);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                 var lastEl = wait.Until(ExpectedConditions.ElementExists(
-                    //By.CssSelector(selector)
-                    By.CssSelector("div#w1>div:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(3)")));
-                    //.FindElement(By.ClassName("price")).FindElement(By.ClassName("converter"))));
+                By.CssSelector($"div#w1>div:nth-of-type({i})>div:nth-of-type(2)>div:nth-of-type(3)")));
+                IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+                js.ExecuteScript("window.scrollBy(0,950);");
                 Console.WriteLine(lastEl.Text);
+                string path = @"C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\Tools\Results.txt";
+                    using (StreamWriter sw = File.AppendText(path))
+                    {
+                        sw.WriteLine(lastEl.Text);
+                    }
+                
             }
-            //string text1 = "dupsko";
-            //console.writeline(text1);
-            //await Task.Delay(3000);
-            //var text1 = driver.FindElement(
-            //    By.CssSelector("div#w1>div:nth-of-type(2)>div:nth-of-type(2)>div:nth-of-type(3)")).Text;
-            //Console.WriteLine(text1);
-            //await Task.Delay(3000);
-            //var text2 = driver.FindElement(By.CssSelector("div#w1>div:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(3)")).Text;
-            //Console.WriteLine(text2);
-            //await Task.Delay(3000);
-            //var text3 = driver.FindElement(By.CssSelector("div#w1>div:nth-of-type(4)>div:nth-of-type(2)>div:nth-of-type(3)")).Text;
-            //Console.WriteLine(text3);
-
         }
     }
 }
