@@ -99,3 +99,4 @@ C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\obj\Debug\net6.0\
 C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\obj\Debug\net6.0\IndependentMetals.pdb
 C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\obj\Debug\net6.0\IndependentMetals.genruntimeconfig.cache
 C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\bin\Debug\net6.0\SeleniumExtras.WaitHelpers.dll
+C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\bin\Debug\net6.0\chromedriver.exe
