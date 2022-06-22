@@ -71,7 +71,7 @@ namespace IndependentMetals.Actions
         }
         public async Task ResultGenerator()
         {
-            string path = @"C:\Users\Kuba\source\repos\IndependentMetals\IndependentMetals\Tools\Results.txt";
+            
             await Task.Delay(3000);
             
             for (int i = 2; i <= 4; i++)
@@ -83,10 +83,6 @@ namespace IndependentMetals.Actions
                 IJavaScriptExecutor js = driver as IJavaScriptExecutor;
                 js.ExecuteScript("window.scrollBy(0,950);");
                 Console.WriteLine(lastEl.Text);
-                    using (StreamWriter sw = File.AppendText(path))
-                    {
-                        sw.WriteLine(lastEl.Text);
-                    }
                 
             }
         }
